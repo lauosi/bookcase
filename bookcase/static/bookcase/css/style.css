@@ -1,0 +1,23 @@
+body{
+    background: white url('');
+}
+.navbar{
+    border-radius:0;
+}
+
+.navbar-brand{
+    font-family:'Pacifico', cursive;
+}
+
+.section{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.book-info{
+    float:right;
+}
+
+
+
+

@@ -1,0 +1,59 @@
+{% extends 'bookcase/base.html' %}
+
+{% block title %}
+Your books
+{% endblock %}
+
+{% block body %}
+    {% if last_books %}
+        {% if last_add != 0%}
+            <p>It has been {{last_add}} days since you have added a book.</p>
+        {% endif %}
+        <div class="row">
+            <h3 class="section">Your last books</h3>
+        </div>
+        <div class="row">
+            {% for book in last_books%}
+                <div class="col-md-4">
+                    {% if book.cover %}
+                        {{book.cover}}
+                    {% else %}
+                        <img src="http://placehold.it/100x160">
+                    {% endif %}
+                    <div class="book-info">
+                        <h3><a href="{% url 'bookcase:detail' book.id %}">{{book.title}}</a></h3>
+                        <h4><a href="{% url 'bookcase:detail_author' book.author.id %}">{{book.author}}</a></h4>
+                        <a href="#" class="btn btn-info" role="button">Read now</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <table class="table">
+            <h3 class="section">Your favourite books</h3>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for best in best_books%}
+                <tr>
+                    <td><a href="{% url 'bookcase:detail' best.id %}">{{best.title}}</a></td>
+                    <td><a href="{% url 'bookcase:detail_author' best.author.id%}">{{best.author}}</a></td>
+                    <td> 4.5 </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+
+    {% else %}
+        <p> Your bookcase is empty.</p>
+    {% endif %}
+{% endblock%}
+
+
