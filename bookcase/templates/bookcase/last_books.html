@@ -1,0 +1,37 @@
+{% extends 'bookcase/base.html' %}
+
+{% block title %}
+Your books
+{% endblock %}
+
+{% block body %}
+    {% if last_books %}
+        <div class="row">
+            <h3 class="section">Your last books</h3>
+        </div>
+        <div class="row">
+            {% for book in last_books%}
+                <div class="col-md-5">
+                    <h3><a href="{% url 'bookcase:detail' book.id %}">{{book.title}}</a></h3>
+                    <div class ="book-cover">
+                        {% if book.cover %}
+                            {{book.cover}}
+                        {% else %}
+                            <img src="http://placehold.it/100x160">
+                        {% endif %}
+                    </div>
+                    <div class="book-info">
+                        <h4><a href="{% url 'bookcase:detail_author' book.author.id %}">{{book.author}}</a></h4>
+                        <h4>{{book.add_date}}</h4>
+                        <a href="#" class="btn btn-info" role="button">Read now</a>
+                        <a href="{% url 'bookcase:add_review' book.id %}" class="btn btn-info" role="button">Add review</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p> Your bookcase is empty.</p>
+    {% endif %}
+{% endblock%}
+
+

@@ -23,6 +23,13 @@ class IndexView(generic.ListView):
         context['best_books'] = Book.objects.order_by('title')[:5]
         return context
 
+class LastView(generic.ListView):
+    template_name = 'bookcase/last_books.html'
+    context_object_name = 'last_books'
+
+    def get_queryset(self):
+        return Book.objects.all().order_by('-add_date')
+
 class DetailView(generic.DetailView):
     model = Book
     template_name = 'bookcase/detail.html'

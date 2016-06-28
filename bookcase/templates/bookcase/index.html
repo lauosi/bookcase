@@ -10,7 +10,7 @@ Your books
             <p>It has been {{last_add}} days since you have added a book.</p>
         {% endif %}
         <div class="row">
-            <h3 class="section">Your last books</h3>
+            <h3 class="section"><a href="{% url 'bookcase:last_books' %}">Your last books</a></h3>
         </div>
         <div class="row">
             {% for book in last_books%}
