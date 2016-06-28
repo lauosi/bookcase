@@ -23,10 +23,13 @@ class Book(models.Model):
     cover = models.ImageField(upload_to = upload_logo, blank=True, null=True)
     genre = models.CharField(max_length=200, default="unknown")
     add_date = models.DateTimeField(default=timezone.now)
-    description = models.TextField(default='description not available')
+    description = models.TextField(default='description not available', blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('bookcase:detail', kwargs={'pk': self.pk})
 
     def days_since_add(self):
         # calculates day since last add
@@ -43,6 +46,6 @@ class Review(models.Model):
     def approve(self):
         self.approved_review = True
         self.save()
-        
+
     def __str__(self):
         return self.text

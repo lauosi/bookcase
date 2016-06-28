@@ -29,13 +29,13 @@
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp; Books
+                    <a href="{% url 'bookcase:add_book'%}">
+                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp; Add book
                     </a>
                 </li>
                 <li class="">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Authors
+                    <a href="{% url 'bookcase:add_author' %}">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Add author
                     </a>
                 </li>
                 <li class="">

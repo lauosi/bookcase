@@ -1,0 +1,22 @@
+{% extends 'bookcase/base.html' %}
+
+{% block title %}
+Author
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div>
+        <h3>Add book to the database</h3>
+    </div>
+    <div class="row">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="Add" />
+        </form>
+    </div>
+</div>
+{% endblock%}
+
+

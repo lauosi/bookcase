@@ -15,11 +15,13 @@ Your books
         <div class="row">
             {% for book in last_books%}
                 <div class="col-md-4">
-                    {% if book.cover %}
-                        {{book.cover}}
-                    {% else %}
-                        <img src="http://placehold.it/100x160">
-                    {% endif %}
+                    <div class ="book-cover">
+                        {% if book.cover %}
+                            {{book.cover}}
+                        {% else %}
+                            <img src="http://placehold.it/100x160">
+                        {% endif %}
+                    </div>
                     <div class="book-info">
                         <h3><a href="{% url 'bookcase:detail' book.id %}">{{book.title}}</a></h3>
                         <h4><a href="{% url 'bookcase:detail_author' book.author.id %}">{{book.author}}</a></h4>

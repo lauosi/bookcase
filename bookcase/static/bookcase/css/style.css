@@ -14,10 +14,14 @@ body{
     padding-bottom: 10px;
 }
 
-.book-info{
+/*.book-info{
     float:right;
-}
+}*/
 
+.book-cover{
+    float:left;
+    padding-right: 10px;
+}
 
 
 

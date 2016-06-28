@@ -1,8 +1,13 @@
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views import generic
+#from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Book, Author
+from .forms import BookForm, AuthorForm
+from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 class IndexView(generic.ListView):
     template_name = 'bookcase/index.html'
@@ -33,3 +38,31 @@ class DetailAuthor(generic.DetailView):
         context['authors_books'] = author.book_set.all()
         return context
 
+class AddBook(generic.FormView):
+    template_name = 'bookcase/add_book.html'
+    form_class = BookForm
+    success_url =  reverse_lazy('bookcase:index')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.add_date = timezone.now()
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+class AddAuthor(generic.FormView):
+    template_name = 'bookcase/add_author.html'
+    form_class = AuthorForm
+    success_url =  reverse_lazy('bookcase:index')
+
+    def form_valid(self, form):
+        # self.object = form.save(commit=False)
+        # self.object.save()
+        form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+def display_meta(request):
+    values = request.META.items()
+    html = []
+    for k, v in values:
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))
