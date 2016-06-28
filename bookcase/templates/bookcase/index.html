@@ -26,6 +26,7 @@ Your books
                         <h3><a href="{% url 'bookcase:detail' book.id %}">{{book.title}}</a></h3>
                         <h4><a href="{% url 'bookcase:detail_author' book.author.id %}">{{book.author}}</a></h4>
                         <a href="#" class="btn btn-info" role="button">Read now</a>
+                        <a href="{% url 'bookcase:add_review' book.id %}" class="btn btn-info" role="button">Add review</a>
                     </div>
                 </div>
             {% endfor %}

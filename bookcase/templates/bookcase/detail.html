@@ -5,22 +5,33 @@ Book
 {% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class=" col-md-2 img-responsive face">
-        {% if book.cover %}
-            {book.cover}
-        {% else %}
-            <img src="http://placehold.it/150x200">
-        {% endif %}
+    <div class="row">
+        <div class=" col-md-2 img-responsive face">
+            {% if book.cover %}
+                {book.cover}
+            {% else %}
+                <img src="http://placehold.it/150x200">
+            {% endif %}
+        </div>
+        <div>
+            <h2>{{ book.title }} - <a href="{% url 'bookcase:detail_author' book.author.id %}">{{ book.author }}</a></h2>
+            <p>{{book.description}}</p>
+        </div>
     </div>
-    <div>
-        <h2>{{ book.title }} - <a href="{% url 'bookcase:detail_author' book.author.id %}">{{ book.author }}</a></h2>
-        <h4>Rating:</h4>
-        <h4>Description:</h4>
-        <p>{{book.description}}</p>
-        <h4>Reviews:</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <h3>
+            <a href="{% url 'bookcase:add_review' pk=book.id %}"><span class="glyphicon glyphicon-plus"></span></a> Reviews </h3>
+            {% for review in book.reviews.all %}
+                <strong>{{review.author}}:</strong>
+                {{review.text|linebreaks}}
+                <br>
+            {% empty %}
+            <p>No reviews here yet</p>
+            {% endfor %}
+        </div>
     </div>
-</div>
+
 
 {% endblock%}
 
